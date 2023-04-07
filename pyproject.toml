@@ -6,13 +6,18 @@ authors = ["Eugene Teoh <eugenetwc1@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
-dm-acme = "^0.4.0"
+python = ">=3.8,<3.10"
+dm-acme = {extras = ["tf"], version = "^0.4.0"}
 torch = "^2.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.2.2"
+pytest = "^7.2.2"
+
+
+[tool.poetry.group.envs.dependencies]
+dm-acme = {extras = ["envs"], version = "^0.4.0"}
 
 [build-system]
 requires = ["poetry-core"]
