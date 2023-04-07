@@ -14,6 +14,6 @@ class EpsilonGreedy(nn.Module):
         if prob > self.epsilon:
             action = torch.argmax(out)
         else:
-            sample_idx = torch.randint(out.shape[0], size=(1,))
+            sample_idx = torch.randint(out.shape[0], size=())
             action = out[sample_idx]
         return action.to(torch.int32)
