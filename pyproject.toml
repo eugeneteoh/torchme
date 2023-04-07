@@ -10,11 +10,10 @@ python = ">=3.8,<3.10"
 dm-acme = {extras = ["tf"], version = "^0.4.0"}
 torch = "^2.0.0"
 
-
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.2.2"
 pytest = "^7.2.2"
-
+ruff = "^0.0.261"
 
 [tool.poetry.group.envs.dependencies]
 dm-acme = {extras = ["envs"], version = "^0.4.0"}
