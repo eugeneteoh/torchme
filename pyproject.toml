@@ -21,3 +21,10 @@ dm-acme = {extras = ["envs"], version = "^0.4.0"}
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+select = [
+    "E",
+    "F",
+    "I"
+]
