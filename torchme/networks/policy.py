@@ -11,9 +11,8 @@ class EpsilonGreedy(nn.Module):
     def forward(self, x):
         out = self.network(x)
         prob = torch.rand(1)
+        # Only works when batch_size=1 now
         if prob > self.epsilon:
-            action = torch.argmax(out)
-        else:
-            sample_idx = torch.randint(out.shape[0], size=())
-            action = out[sample_idx]
-        return action.to(torch.int32)
+            return torch.argmax(out)
+        sample_idx = torch.randint(out.shape[1], size=())
+        return out[0, sample_idx]
