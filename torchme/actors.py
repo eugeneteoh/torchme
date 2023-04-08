@@ -1,10 +1,11 @@
-from acme import core
 import torch
+from acme import core
 
 
 class FeedForwardActor(core.Actor):
-    def __init__(self, policy_network, adder=None, variable_client=None):
+    def __init__(self, policy_network, env_spec, adder=None, variable_client=None):
         self.policy_network = policy_network
+        self.env_spec = env_spec
         self.variable_client = variable_client
         self.adder = adder
 
@@ -16,7 +17,7 @@ class FeedForwardActor(core.Actor):
             if isinstance(policy, torch.distributions.Distribution)
             else policy
         )
-        return action.cpu().detach().numpy()
+        return action.cpu().detach().numpy().astype(self.env_spec.actions.dtype)
 
     def observe_first(self, timestep):
         if self.adder:

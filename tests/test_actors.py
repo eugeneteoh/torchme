@@ -1,12 +1,12 @@
-import pytest
-from acme import environment_loop
-from acme import specs
 import dm_env
 import numpy as np
+import pytest
+import torch
+from acme import environment_loop, specs
 from acme.testing import fakes
 from torch import nn
+
 from torchme import actors
-import torch
 
 
 class FakeNetwork(nn.Module):
@@ -21,7 +21,7 @@ class FakeNetwork(nn.Module):
     def forward(self, x):
         out = self.network(x)
         out = torch.argmax(out)
-        return out.to(torch.int32)
+        return out
 
 
 @pytest.fixture
@@ -41,6 +41,6 @@ def test_feedforward(fake_env):
     env_spec = specs.make_environment_spec(fake_env)
 
     network = FakeNetwork(env_spec)
-    actor = actors.FeedForwardActor(network)
+    actor = actors.FeedForwardActor(network, env_spec)
     loop = environment_loop.EnvironmentLoop(fake_env, actor)
     loop.run(20)
