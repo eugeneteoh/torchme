@@ -1,0 +1,2 @@
+- [ ] Implement pytorch model checkpointer
+- [ ] Move from using `tf.Dataset` to pytorch dataloaders
