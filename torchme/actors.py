@@ -8,9 +8,12 @@ class FeedForwardActor(core.Actor):
         self.env_spec = env_spec
         self.variable_client = variable_client
         self.adder = adder
+        self.device = next(self.policy_network.parameters()).device
 
     def select_action(self, observation):
-        observation = torch.as_tensor(observation).unsqueeze(0)
+        self.policy_network.eval()
+
+        observation = torch.as_tensor(observation, device=self.device).unsqueeze(0)
         policy = self.policy_network(observation)
         action = (
             policy.sample()
